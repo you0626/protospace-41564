@@ -14,7 +14,7 @@ class PrototypesController < ApplicationController
     if @prototype.save
     redirect_to @prototype
     else
-    @prototype.image.purge_later if params[:prototype][:image].present?
+    @prototype.image.purge
     render :new
     end
   end
@@ -36,7 +36,7 @@ class PrototypesController < ApplicationController
     if @prototype.update(prototype_params)
     redirect_to @prototype
     else
-    @prototype.image.purge_later if params[:prototype][:image].present?
+    @prototype.image.purge
       render :edit
     end
   end
