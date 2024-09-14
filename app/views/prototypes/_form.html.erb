@@ -1,9 +1,9 @@
-<%= form_with model: @prototype, local: true, id: "prototype_form" do |f| %>
-  <% if @prototype.errors.any? %>
+<%= form_with model: prototype, local: true, id: "prototype_form" do |f| %>
+  <% if prototype.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@prototype.errors.count, "error") %> prohibited this prototype from being saved:</h2>
+      <h2><%= pluralize(prototype.errors.count, "error") %> prohibited this prototype from being saved:</h2>
       <ul>
-        <% @prototype.errors.full_messages.each do |message| %>
+        <% prototype.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -12,7 +12,7 @@
 
   <div class="field">
     <%= f.label :title, "プロトタイプの名称" %><br />
-    <%= f.text_field :title, id: "prototype_title" %>
+    <%= f.text_field :title, id:"prototype_title" %>
   </div>
 
   <div class="field">
@@ -27,7 +27,11 @@
 
   <div class="field">
     <%= f.label :image, "プロトタイプの画像" %><br />
-    <%= f.file_field :image, id: "prototype_image" %>
+    <%= f.file_field :image, id:"prototype_image" %>
+    
+    <% if prototype.image.attached? %>
+      <%= image_tag url_for(prototype.image), alt: 'Prototype Image' %>
+    <% end %>
   </div>
 
   <div class="actions">
