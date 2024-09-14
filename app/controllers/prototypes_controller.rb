@@ -11,11 +11,11 @@ class PrototypesController < ApplicationController
 
   def create
     @prototype = Prototype.new(prototype_params)
-
     if @prototype.save
-      redirect_to prototypes_path
+      redirect_to @prototype, notice: 'Prototype was successfully created.'
     else
-      render :new
+      flash[:alert] = 'There were errors in your form'
+      redirect_to new_prototype_path
     end
   end
 
