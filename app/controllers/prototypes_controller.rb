@@ -14,8 +14,9 @@ class PrototypesController < ApplicationController
     if @prototype.save
       redirect_to @prototype, notice: 'Prototype was successfully created.'
     else
-      flash[:alert] = 'There were errors in your form'
-      redirect_to new_prototype_path
+    flash.now[:alert] = 'There were errors in your form'
+    @prototype.image.purge if @prototype.image.attached?
+    render :new
     end
   end
 
@@ -34,8 +35,10 @@ class PrototypesController < ApplicationController
 
   def update
     if @prototype.update(prototype_params)
-      redirect_to @prototype
+    redirect_to @prototype, notice: 'Prototype was successfully updated.'
     else
+    flash.now[:alert] = 'There were errors in your form'
+    @prototype.image.purge if @prototype.image.attached?
       render :edit
     end
   end
