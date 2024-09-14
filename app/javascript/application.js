@@ -2,15 +2,11 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-document.addEventListener("turbo:load", () => {
-  const form = document.querySelector('form');
-  
-  if (form) {
-    form.addEventListener('submit', () => {
-      const fileInput = document.querySelector('#prototype_image');
-      if (fileInput && form.querySelector('.field_with_errors')) {
-        fileInput.value = '';  // 画像フィールドをリセット
-      }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('prototype_form');
+  const imageField = document.getElementById('prototype_image');
+
+  if (form && imageField) {
+    imageField.value = '';
   }
 });

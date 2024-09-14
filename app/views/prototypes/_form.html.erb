@@ -1,4 +1,4 @@
-<%= form_with model: @prototype, local: true do |f| %>
+<%= form_with model: @prototype, local: true, id: "prototype_form" do |f| %>
   <% if @prototype.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@prototype.errors.count, "error") %> prohibited this prototype from being saved:</h2>
@@ -12,7 +12,7 @@
 
   <div class="field">
     <%= f.label :title, "プロトタイプの名称" %><br />
-    <%= f.text_field :title, id:"prototype_title" %>
+    <%= f.text_field :title, id: "prototype_title" %>
   </div>
 
   <div class="field">
@@ -22,15 +22,15 @@
 
   <div class="field">
     <%= f.label :concept, "コンセプト" %><br />
-    <%= f.text_area :concept, class: :form__text, id:"prototype_concept" %>
+    <%= f.text_area :concept, class: :form__text, id: "prototype_concept" %>
   </div>
 
   <div class="field">
     <%= f.label :image, "プロトタイプの画像" %><br />
-    <%= f.file_field :image, id:"prototype_image" %>
+    <%= f.file_field :image, id: "prototype_image" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "保存する", class: :form__btn  %>
+    <%= f.submit "保存する", class: :form__btn %>
   </div>
 <% end %>
