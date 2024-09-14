@@ -14,7 +14,7 @@ class PrototypesController < ApplicationController
     if @prototype.save
     redirect_to @prototype
     else
-    @prototype.image.datach
+    @prototype.image.purge
     render :new
     end
   end
