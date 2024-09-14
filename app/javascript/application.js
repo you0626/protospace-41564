@@ -2,11 +2,14 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('prototype_form');
-  const imageField = document.getElementById('prototype_image');
-
-  if (form && imageField) {
-    imageField.value = '';
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', function(event) {
+      const imageField = document.querySelector('#prototype_image');
+      if (imageField) {
+        imageField.value = '';
+      }
+    });
   }
 });
