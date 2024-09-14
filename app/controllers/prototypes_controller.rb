@@ -1,7 +1,6 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:edit, :update, :destroy, :show]
   before_action :move_to_index, except: [:index, :show]
-  before_validation :reset_image_if_needed
   def index
     @prototypes = Prototype.all
   end
@@ -54,10 +53,6 @@ class PrototypesController < ApplicationController
     unless user_signed_in?
       redirect_to action: :index
     end
-  end
-
-  def reset_image_if_needed
-    self.image = nil if errors[:image].present?
   end
 
 end
