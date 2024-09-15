@@ -1,8 +1,8 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:edit, :update, :destroy, :show]
+  before_action :set_prototype, only: [:edit, :update, :destroy, :show, :index]
   before_action :move_to_index, except: [:index, :show]
   def index
-    @prototypes = Prototype.include(:user).all
+    @prototypes = Prototype.includes(:user).all
   end
 
   def new
@@ -26,7 +26,7 @@ class PrototypesController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @prototype.comments.include(:user)
+    @comments = @prototype.comments.includes(:user)
   end
 
   def edit
