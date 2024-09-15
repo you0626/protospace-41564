@@ -4,8 +4,8 @@
     <%= link_to prototype.title, prototype_path(prototype), class: :card__title%>
     <p class="card__summary">
       <%= prototype.catch_copy %>
-      <%= prototype.user.name %>
     </p>
+    <%= prototype.user.name %>
     <% if user_signed_in? %>
       <%= link_to "by #{current_user.name}", user_path(current_user), class: :card__user %>
     <% end %>
