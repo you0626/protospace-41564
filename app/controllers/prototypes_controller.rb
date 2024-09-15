@@ -12,7 +12,7 @@ class PrototypesController < ApplicationController
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
-    redirect_to root_path
+    redirect_to @prototype
     else
     @prototype.image.purge
     render :new
@@ -34,7 +34,7 @@ class PrototypesController < ApplicationController
 
   def update
     if @prototype.update(prototype_params)
-    redirect_to root_path
+    redirect_to @prototype
     else
     @prototype.image.purge
       render :edit
