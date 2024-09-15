@@ -26,8 +26,6 @@ class PrototypesController < ApplicationController
   end
 
   def show
-    prototype = Prototype.find(params[:id])
-    prototype.show
     @comment = Comment.new
     @comments = @prototype.comments.includes(:user)
   end
@@ -36,11 +34,10 @@ class PrototypesController < ApplicationController
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    if prototype.update(prototype_params)
-      redirect_to root_path
+    if @prototype.update(prototype_params)
+      redirect_to @prototype
     else
-      prototype.image.purge
+      @prototype.image.purge
       render :edit
     end
   end
