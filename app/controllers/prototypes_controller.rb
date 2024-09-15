@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:edit, :update, :destroy, :show]
+  before_action :set_prototype, only: [:edit, :show]
   before_action :move_to_index, except: [:index, :show]
   def index
     @prototypes = Prototype.includes(:user).all
@@ -12,7 +12,7 @@ class PrototypesController < ApplicationController
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
-    redirect_to @prototype
+    redirect_to root_path
     else
     @prototype.image.purge
     render :new
@@ -20,7 +20,8 @@ class PrototypesController < ApplicationController
   end
 
   def destroy
-    @prototype.destroy
+    prototype = Prototype.find(params[:id])
+    prototype.destroy
     redirect_to root_path
   end
 
@@ -33,10 +34,11 @@ class PrototypesController < ApplicationController
   end
 
   def update
-    if @prototype.update(prototype_params)
-    redirect_to @prototype
+    prototype = Prototype.find(params[:id])
+    if prototype.update(prototype_params)
+      redirect_to root_path
     else
-    @prototype.image.purge
+      prototype.image.purge
       render :edit
     end
   end
