@@ -1,8 +1,9 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:edit, :show, :update]
   before_action :move_to_index, except: [:index, :show]
+  before_action :authenticate_user!, only: [:new,:edit,:destroy]
   def index
-    @prototypes = Prototype.includes(:user).all
+    @prototypes = Prototype.includes(:user)
   end
 
   def new
@@ -12,10 +13,9 @@ class PrototypesController < ApplicationController
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
-    redirect_to root_path
+      redirect_to root_path
     else
-    @prototype.image.purge
-    render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -35,10 +35,9 @@ class PrototypesController < ApplicationController
 
   def update
     if @prototype.update(prototype_params)
-      redirect_to @prototype
+      redirect_to prototype_path
     else
-      @prototype.image.purge
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
